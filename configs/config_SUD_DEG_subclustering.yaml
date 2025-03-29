@@ -1,0 +1,126 @@
+# config file for DEG subcluster identification
+
+# random number generator setup
+#
+# random seed to use for Pearson correlation significance testing
+rand_seed_deg_corr: 42 
+
+
+# dataset information
+# 
+# DEG subclustering example input expression dataset directory (relative to root)
+input_data_dir: 'data' 
+# DEG subclustering example input expression dataset file name
+input_data_fn: 'human_SN_anndata__DEG_subclust_example.h5ad' 
+# DEA results parent directory (relative to root)
+dea_data_dir: 'data/processed_DEG_lists_example_SUD_DEA' 
+# DEG subclustering parent output directory (relative to root)
+deg_clust_data_dir: 'results/sud_dea_results_processed' 
+# subdirectory with highly coordinated DEG subcluster information
+deg_sc_data_dir: 'DEG_subclusters' 
+
+
+# DEG subclustering parameters
+#
+# significance threshold alpha for DEG pairwise Pearson correlations
+deg_pearson_corr_sig_alpha: 0.05 
+# whether to compute DEG clusters/subclusters for control
+# group donors, rather than the default behavior of computing
+# them for treatment group donors
+analyze_control_group_flag: False 
+# file name tag for DEG cluster labels
+deg_clust_label_fn_tag: 'deg_clust_labels' 
+# file name tag for cross-DEA DEG comparisons
+deg_comp_tc_fn_tag: 'degs_w_sud_by_hiv_group' 
+# name tag for cell type mix being analyzed
+cell_type_mix_tag: 'DA_MG' 
+# threshold (expressed as a multiplier of a DEG
+# cluster's DEG pair distance dispersion, (x-mu)/std)
+# to use for identifying potential junctions
+# between DEG subclusters in a DEG cluster
+ppt_deg_clust_disp_threshold: 3.0 
+# flag indicating whether to print Pearson
+# correlations values onto DEG subcluster heatmaps
+add_htmap_txt: True 
+# the percentile of the distribution for DEG subcluster
+# average similarity that marks the lower tail
+# (in future analyses, this measure should be specified
+# after inspecting the DEG subcluster mean similarity
+# distribution for all DEAs of interest; for this test
+# case, we provide the value from our analysis)
+lower_threshold_dsc_sim: 25.0 
+#
+# information for initializing functional annotations
+# dictionary specifying DEAs to process DEG subclusters for
+ann_deg_cassete_fn_dict: 
+        treatment:
+                dir: 'treatment_group'
+                test_cond_sets:
+                        sud_by_hiv:
+                                deg_info_fn: 'degs_w_sud_by_hiv_group__test_cond_deg_subclust_w_scores.csv'
+                                deg_ann_fn: 'degs_w_sud_by_hiv_group__all_subclust_sim_score_go_msigdb_ann__for_review.csv'
+# list of cell types for DEG subcluster
+# annotation
+# list of cell type tags to use for finding DEG cassettes
+ct_list : 
+        - 'DA_'
+        - 'MG_'
+
+
+# GSEA information (to facilitate initial DEG subcluster annotation)
+#
+# GO parent directory (relative to root)
+go_parent_dir: 'data/gene_ontology_data' 
+# Enrichr library file directory (relative to GO parent directory)
+enr_dir: 'enrichr_libraries' 
+# annotated gene set libraries to use for Enrichr analysis
+gseapy_enrichr_libs: 
+        - 'GO_Biological_Process_2023'
+# GO ontology file, which contains the relationships
+# between GO terms, to be used for identifying the most
+# specific annotations
+go_obo_fn : 'go-basic.obo' 
+
+
+
+# Visualization information
+# cell type to abbreviation mapping
+ct_to_abbreviation_dict: 
+        dopaminergic_neuron: 'DA'
+        microglia: 'MG'
+
+
+
+# DEA parameters
+#
+# dataset partition variable
+dea_partition_variable: 'finalized_major_cell_type' 
+# condition comparison list
+dea_cond_comparison_list:  
+        - ['hiv_sud_status','neg_y','neg_n']
+
+# number of folds to use for k-fold cross-validation
+dea_n_folds_kfcv: 3 
+# folder with dea-formatted files
+dea_deseq_formatted_data_dir: 'dea__finalized_major_cell_type' 
+# folder with setup operations
+# performed for dea-formatted files
+dea_ready_deseq_formatted_data_dir: 'diffexpr_ready_files' 
+# file name tag for dea-formatted files
+dea_ready_deseq_formatted_data_fn_tag: '' 
+# diffexpr-ready file validity check summary file name
+dea_pass_fail_check_fn_root: 'dea_setup_check_file'
+# folder with dea results
+dea_results_dir: 'wald_test_results/finalized_major_cell_type_groups' 
+
+
+
+# significance parameters
+#
+# dea output upreg file name root
+dea_output_upreg_fn_root: 'sig_overexpr_genes_all' 
+# dea output downreg file name root
+dea_output_downreg_fn_root: 'sig_underexpr_genes_all' 
+
+
+root_dir: '/sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results'

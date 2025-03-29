@@ -1,0 +1,96 @@
+# config file for analysis of SUD
+# differentially expressed genes (DEGs)
+
+# dataset information
+# 
+# k-fold cross-validated DEA  result parent directory (relative to root)
+dea_data_dir: 'data/sud_dea_results_example' 
+# DEA processed result parent directory for DEG comparison visualizations
+# (relative to root)
+dea_comparison_data_dir: 'data/processed_DEG_lists_example_SUD_DEA'
+# DEA result output data parent directory (relative to root)
+output_dea_data_dir: 'results/sud_dea_results_processed' 
+# directory with DEA-formatted files
+dea_deseq_formatted_data_dir: 'dea__finalized_major_cell_type' 
+# subdirectory with DEA results
+dea_results_dir: 'wald_test_results/finalized_major_cell_type_groups' 
+# output file name root, all genes and log2fcs
+dea_output_all_fn_root: 'diff_expr_levels_all'
+# output file name root, upregulated DEGs
+dea_output_upreg_fn_root: 'sig_overexpr_genes_all' 
+# output file name root, downregulated DEGs
+dea_output_downreg_fn_root: 'sig_underexpr_genes_all'
+
+
+
+# k-fold cross-validation parameters
+#
+# number of folds used in DEA
+dea_n_folds_kfcv: 2
+
+
+
+# DEG list comparison parameters for SUD DEAs
+#
+# output directory for DEG set comparisons
+dea_set_comp_dir: 'deg_comparisons__impact_of_sudyn_by_hiv_group' 
+# optional map that allows multiple DEA comparisons
+# to have their DEGs combined for the purpose of visualization.
+# either of the form {_index_: [list of orig DEAs to combine], ...}
+# or 'None' to skip
+tc_subset_mapping : 'None' 
+# list of DEA pairs on which to perform
+# permutation tests, to determine whether
+# the number of overlapping DEGs is statistically
+# likely to occur through random selection
+group_overlap_pair_dict: 
+        'dopaminergic_neuron':
+                - 'hiv_sud_status_pos_u_y_pos_u_n,hiv_sud_status_neg_y_neg_n'
+
+
+
+# visualization information
+#
+hiv_txt_dict: 
+        pos_d: 'HIV+d'
+        pos_u: 'HIV+u'
+        neg: 'HIV-'
+# SUD status text map
+sud_txt_dict: 
+        y: 'SUD+'
+        n: 'SUD-'
+
+
+
+# DEA parameters
+#
+# dataset partition variable
+dea_partition_variable: 'finalized_major_cell_type' 
+#
+# condition comparison list
+dea_cond_comparison_list:  
+        - ['hiv_sud_status','pos_d_y','pos_d_n']
+        - ['hiv_sud_status','pos_u_y','pos_u_n']
+        - ['hiv_sud_status','neg_y','neg_n']
+
+
+
+# DESeq2 fitting parameters
+#
+# test type ('Wald', 'LRT')
+dea_test_type: 'Wald' 
+
+
+
+# significance parameters
+#
+# significance level
+dea_alpha: 0.05 
+# number of top genes to use for more restricted analysis
+dea_n_top: 10
+# name tag used in columns containing adjusted
+# p-values for k-fold cross-validation data subsets
+dea_p_col_tag: 'padj' 
+
+
+root_dir: '/sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results'

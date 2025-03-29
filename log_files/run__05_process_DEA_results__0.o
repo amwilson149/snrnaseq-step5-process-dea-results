@@ -1,0 +1,1245 @@
+Sender: LSF System <lsfadmin@lc06e60>
+Subject: Job 176551138: </sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0> in cluster <chimera> Done
+
+Job </sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0> was submitted from host <li04e02> by user <wilsoa28> in cluster <chimera> at Sat Mar 29 13:31:48 2025
+Job was executed on host(s) <10*lc06e60>, in queue <premium>, as user <wilsoa28> in cluster <chimera> at Sat Mar 29 13:32:21 2025
+</hpc/users/wilsoa28> was used as the home directory.
+</sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results> was used as the working directory.
+Started at Sat Mar 29 13:32:21 2025
+Terminated at Sat Mar 29 13:47:13 2025
+Results reported at Sat Mar 29 13:47:13 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -P acc_motor # project name
+#BSUB -q premium # queue name ('premium' is standard on Minerva)
+#BSUB -n 10 # number of tasks in a parallel job (also submits as a parallel job)
+#BSUB -R span[hosts=1] # resource requirements
+#BSUB -R rusage[mem=20000] # resource requirements
+#BSUB -W 10:00 # job runtime limit (HH:MM)
+#BSUB -J /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0
+#BSUB -o /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0.o
+#BSUB -e /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0.e
+#BSUB -L /bin/bash
+
+set -ev
+
+# 01. Set up environment
+# 01a. Activate conda environment
+ml anaconda3/2020.11
+ml -python
+source /hpc/packages/minerva-centos7/anaconda3/2020.11/etc/profile.d/conda.sh
+conda activate CO-deg-analysis-env
+
+# 01b. Get root directory
+exec_dir=$( pwd )
+cd "${exec_dir}"
+an_dea_res_dir="${exec_dir}/scripts"
+
+# 02. Set up config files
+# 02a. Specify DEA summary config file path
+cfg="${exec_dir}/configs/config_SUD_DEG_analysis.yaml"
+echo "${cfg}"
+# 02b. Specify DEG subcluster config file path
+cfg_dsc="${exec_dir}/configs/config_SUD_DEG_subclustering.yaml"
+echo "${cfg_dsc}"
+# 02b. Add root directory to config file if not specified
+if ! $( grep -q 'root_dir' ${cfg} ); then
+	echo "Initializing config file with current directory as root directory"
+	echo "root_dir: '${exec_dir}'" >> ${cfg}
+else
+	echo "DEA results summary config file already contains root directory; proceeding"
+fi
+if ! $( grep -q 'root_dir' ${cfg_dsc} ); then
+	echo "Initializing config file with current directory as root directory"
+	echo "root_dir: '${exec_dir}'" >> ${cfg_dsc}
+else
+	echo "DEG subclustering config file already contains root directory; proceeding"
+fi
+
+# 03. Specify cell type(s) for processing DESeq2 results
+group="dopaminergic_neuron"
+
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   894.28 sec.
+    Max Memory :                                 639 MB
+    Average Memory :                             248.40 MB
+    Total Requested Memory :                     200000.00 MB
+    Delta Memory :                               199361.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                14
+    Run time :                                   892 sec.
+    Turnaround time :                            925 sec.
+
+The output (if any) follows:
+
+/sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/configs/config_SUD_DEG_analysis.yaml
+/sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/configs/config_SUD_DEG_subclustering.yaml
+DEA results summary config file already contains root directory; proceeding
+DEG subclustering config file already contains root directory; proceeding
+Plotting results for individual fold results....
+Grouping values to be processed:
+dopaminergic_neuron
+Processing results for finalized_major_cell_type group dopaminergic_neuron...
+Searching for files in /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results//data/sud_dea_results_example/dea__finalized_major_cell_type/wald_test_results/finalized_major_cell_type_groups/dopaminergic_neuron....
+Processing results for
+	hiv_sud_status: pos_d_y vs. pos_d_n
+	Results files:
+		
+
+	Normed counts files:
+		
+Processing results for
+	hiv_sud_status: pos_u_y vs. pos_u_n
+	Results files:
+		
+
+	Normed counts files:
+		
+Processing results for
+	hiv_sud_status: neg_y vs. neg_n
+	Results files:
+		wald_results_hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_1.csv
+		wald_results_hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_2.csv
+
+	Normed counts files:
+		wald_norm_counts___hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_1.csv
+		wald_norm_counts___hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_2.csv
+Processing fold 1 results for this comparison...
+Result and normalized count indices match. Proceeding...
+Genes with padj < 0.05: 0 (0.0% high-count genes)
+	 Upregulated: 0 (0.0%)
+	 Downregulated: 0 (0.0%)
+Processing fold 2 results for this comparison...
+Result and normalized count indices match. Proceeding...
+Genes with padj < 0.05: 0 (0.0% high-count genes)
+	 Upregulated: 0 (0.0%)
+	 Downregulated: 0 (0.0%)
+No results files were found for this group; skipping.
+
+
+
+Plotting results for k-fold cross-validated results....
+Grouping values to be processed:
+dopaminergic_neuron
+Processing results for finalized_major_cell_type group dopaminergic_neuron...
+Processing results for
+	hiv_sud_status: pos_d_y vs. pos_d_n
+	Results files:
+		
+
+	Normed count files:
+		
+No results files were found for this group; skipping.
+
+Processing results for
+	hiv_sud_status: pos_u_y vs. pos_u_n
+	Results files:
+		
+
+	Normed count files:
+		
+No results files were found for this group; skipping.
+
+Processing results for
+	hiv_sud_status: neg_y vs. neg_n
+	Results files:
+		wald_results_hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_1.csv
+		wald_results_hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_2.csv
+
+	Normed count files:
+		wald_norm_counts___hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_1.csv
+		wald_norm_counts___hiv_sud_status__dopaminergic_neuron__hiv_sud_status_neg_y_vs_neg_n__fold_2.csv
+Processing fold 1 results for this comparison...
+Result and normalized count indices match. Proceeding...
+Processing fold 2 results for this comparison...
+Result and normalized count indices match. Proceeding...
+Cross-fold results DataFrame:
+                                  baseMean_1  ...  norm_count_mean_2
+GRCh38_______________MIR1302-2HG         1.0  ...                1.0
+GRCh38_______________FAM138A             1.0  ...                1.0
+GRCh38_______________AL627309.3          1.0  ...                1.0
+GRCh38_______________AL627309.2          1.0  ...                1.0
+GRCh38_______________AL627309.4          1.0  ...                1.0
+
+[5 rows x 16 columns] 
+
+Saved cross-fold expression levels, log2 fold changes, and p-values to file.
+Genes with padj < 0.05: 0 (0.0% high-count genes)
+	 Upregulated: 0 (0.0%)
+	 Downregulated: 0 (0.0%)
+Sideways volcano plot saved.
+
+
+DEG expression level plots saved.
+Saving significantly up- and down-regulated DEGs...
+
+
+Generating visual comparisons of DEGs across SUD DEAs....
+Groups for which DEGs will be compared:
+	dopaminergic_neuron
+
+
+Comparing DEG lists for dopaminergic_neuron
+Finding deg files for hiv_sud_status_pos_d_y_pos_d_n:
+Finding deg files for hiv_sud_status_pos_u_y_pos_u_n:
+Finding deg files for hiv_sud_status_neg_y_neg_n:
+Col length: 588
+Row length: 120
+Generating pairwise DEG Pearson correlations for specified DEA/cell type DEGs....
+Grouping values to be processed:
+dopaminergic_neuron
+microglia
+AnnData object with n_obs × n_vars = 400 × 20000
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap', 'scaledX'
+    obsp: 'connectivities', 'distances' 
+
+['000001', '000002', '000003', '000004', '000005', '000006', '000007', '000008', '000009', '000010', '000011', '000012', '000013', '000014', '000015', '000016', '000017', '000018', '000019', '000020', '000021', '000022', '000023', '000024', '000025', '000026']
+Removing existing scaledX object...
+Pulling DEGs by cell type for
+	hiv_sud_status: neg_y vs. neg_n
+Processing results for finalized_major_cell_type group dopaminergic_neuron...
+	Up DEG files:
+		sig_overexpr_genes_all__alpha_0.05__hiv_sud_status_neg_y_neg_n.csv
+
+	Down DEG files:
+		sig_underexpr_genes_all__alpha_0.05__hiv_sud_status_neg_y_neg_n.csv
+	Reading up DEGs...
+	0 up DEGs found
+	Reading down DEGs...
+	51 down DEGs found
+Processing results for finalized_major_cell_type group microglia...
+	Up DEG files:
+		sig_overexpr_genes_all__alpha_0.05__hiv_sud_status_neg_y_neg_n.csv
+
+	Down DEG files:
+		sig_underexpr_genes_all__alpha_0.05__hiv_sud_status_neg_y_neg_n.csv
+	Reading up DEGs...
+	65 up DEGs found
+	Reading down DEGs...
+	450 down DEGs found
+Processing treatment group
+
+	Processing patient 000001
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 14 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 22 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000002
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 5 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 7 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000004
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 0 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 2 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000006
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 14 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 9 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000012
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 0 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 11 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000013
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 20 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 5 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000014
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 3 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 5 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000015
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 17 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 3 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000019
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 3 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 2 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000021
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 1 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 12 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000023
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 1 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 0 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000024
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 0 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 5 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000025
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 42 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 12 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+
+	Processing patient 000026
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 14 × 51
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Expression data for patient microglia barcodes: AnnData object with n_obs × n_vars = 22 × 515
+    obs: 'patient_ID', 'hiv_sud_status', 'finalized_major_cell_type'
+    uns: 'hvg', 'leiden', 'leiden_colors', 'n_pass_nuclei_total', 'neighbors', 'umap'
+    obsm: 'X_pca', 'X_umap'
+    obsp: 'connectivities', 'distances'
+Axes(0.125,0.11;0.775x0.77) 0 50 DA
+Axes(0.125,0.11;0.775x0.77) 51 565 MG
+Computing DEG clusters....
+Assessing DEG correlations for
+	hiv_sud_status: neg_y vs. neg_n
+	Extracted 39411 significantly correlated DEG pairs
+	(24.65% of all pairs)
+	Building similarity matrix for 566 DEGs, using only significant pairwise Pearson correlations.
+	Getting the DEG members of each correlation cluster...
+		Cluster 0 (black)
+			DEG members:
+			DA_down_OTUD7A
+			DA_down_PKP4
+			DA_down_DLG1
+			DA_down_AGTPBP1
+			DA_down_FUT8
+			DA_down_SAMD12
+			DA_down_ENPP2
+			DA_down_HHIP
+			DA_down_TMEFF2
+			DA_down_GRM3
+			DA_down_ZNF536
+			DA_down_CLMN
+			DA_down_PDE1C
+			DA_down_SH3GL3
+			DA_down_PLCL1
+			DA_down_ERBIN
+			DA_down_KLHL32
+			DA_down_SLAIN1
+			DA_down_SEPTIN7
+			DA_down_KCNH8
+			DA_down_LINC00609
+			DA_down_DPYD
+			DA_down_ATP8A1
+			DA_down_TMEM144
+			DA_down_SPOCK3
+			DA_down_UNC5C
+			DA_down_TF
+			DA_down_EDIL3
+			DA_down_TMTC2
+			DA_down_DOCK4
+			DA_down_PEX5L
+			DA_down_MAN2A1
+			DA_down_TTLL7
+			DA_down_SLC24A2
+			DA_down_IL1RAPL1
+			DA_down_SLC7A14-AS1
+			DA_down_ANK3
+			DA_down_AC008571.2
+			DA_down_RNF220
+			DA_down_MBP
+			DA_down_ST18
+			DA_down_CTNNA3
+		Cluster 12 (burlywood)
+			DEG members:
+			MG_down_TNFAIP8
+			MG_down_C1QC
+			MG_down_TLR5
+			MG_down_RNF217
+			MG_down_NOTCH2
+			MG_down_PPM1L
+		Cluster 18 (chocolate)
+			DEG members:
+			MG_down_HIVEP3
+			MG_down_EHBP1
+			MG_down_CENPP
+			MG_down_SPATA5
+		Cluster 1 (coral)
+			DEG members:
+			DA_down_CADM2
+			DA_down_NLGN1
+			DA_down_KIRREL3
+			DA_down_NKAIN2
+		Cluster 17 (cornsilk)
+			DEG members:
+			MG_down_TBC1D16
+			MG_down_ENOX2
+			MG_down_STIM1
+			MG_down_ELP4
+			MG_down_CD2AP
+			MG_down_ELL2
+			MG_down_CEP128
+			MG_down_SCMH1
+			MG_down_SRBD1
+		Cluster 15 (darkgoldenrod)
+			DEG members:
+			MG_down_EPSTI1
+			MG_down_IFI44L
+			MG_up_GRID2
+			MG_up_XACT
+			MG_up_SYNDIG1
+		Cluster 26 (darkgreen)
+			DEG members:
+			MG_up_SQSTM1
+			MG_down_PRKCA
+			MG_down_NCK2
+			MG_down_SH3RF3
+			MG_down_DDX10
+			MG_down_SLCO2B1
+			MG_down_PTPRE
+			MG_down_LINC01094
+		Cluster 33 (darkolivegreen)
+			DEG members:
+			MG_down_FCHO2
+			MG_down_HIVEP2
+			MG_down_ARHGAP18
+			MG_down_PTPN1
+			MG_down_ASPH
+		Cluster 10 (darkorange)
+			DEG members:
+			MG_down_CHST11
+			MG_down_HRH2
+		Cluster 3 (darkred)
+			DEG members:
+			MG_down_DIRC3
+			MG_down_IQGAP2
+			MG_down_SLC16A10
+		Cluster 25 (darkturquoise)
+			DEG members:
+			MG_down_MT-ND4
+			MG_down_MT-CO3
+			MG_down_PBX3
+			MG_down_TMEM163
+			MG_up_UBC
+			MG_up_SERPINE1
+			MG_down_TTLL7
+			MG_down_UNC5C
+			MG_down_PLCL1
+			MG_up_CPED1
+			MG_down_MBP
+		Cluster 27 (darkviolet)
+			DEG members:
+			MG_down_CAMK2D
+			MG_down_TGFBR1
+			MG_up_NAV2
+			MG_down_CCDC26
+		Cluster 16 (deeppink)
+			DEG members:
+			MG_down_PIK3AP1
+			MG_down_AL163541.1
+			DA_down_DSCAML1
+		Cluster 20 (forestgreen)
+			DEG members:
+			MG_down_TPRG1
+			MG_down_RAB20
+			MG_down_RBMS1
+			MG_down_BACH1
+		Cluster 4 (gray)
+			DEG members:
+			MG_down_FGF12
+			MG_down_CNOT6L
+			MG_down_P4HA1
+			MG_down_ANLN
+			MG_down_MS4A7
+			MG_down_PTPRG
+			MG_down_EZH2
+			MG_up_DNAH7
+			MG_up_TMEM232
+			MG_down_HELLS
+			MG_up_AGBL4
+			MG_up_C8orf34
+			MG_down_RFC3
+			MG_up_WDR49
+			MG_up_CFAP299
+			MG_up_CFAP54
+			MG_down_ATAD2
+			MG_up_SYNE1
+			MG_down_DIAPH3
+			MG_down_BRIP1
+			MG_up_CRB1
+		Cluster 28 (hotpink)
+			DEG members:
+			MG_down_FMN1
+			MG_down_ERC2
+			MG_down_BCL6
+			MG_up_LINC01374
+			MG_up_HS3ST4
+			MG_up_SORL1
+			MG_up_SFMBT2
+			MG_up_RASGEF1C
+			MG_up_OXR1
+			MG_up_ARHGAP22
+			MG_up_AC008691.1
+			MG_up_P2RY12
+			MG_up_CACNA1A
+			MG_up_FOS
+			MG_up_SOCS6
+			MG_up_CX3CR1
+			MG_up_AC011586.2
+			MG_up_RTTN
+			MG_down_FYB1
+			MG_down_ERBB4
+			MG_down_SLC2A13
+			MG_down_RALGAPA2
+			MG_up_ZFPM2-AS1
+			MG_up_IFNGR1
+			MG_up_IL6ST
+			MG_up_KHDRBS3
+			MG_up_FMNL3
+			MG_up_A2M
+			MG_up_LINC02712
+			MG_up_LINC01141
+			MG_up_AC087564.1
+			MG_up_TBC1D4
+			MG_up_KIF26B
+			MG_up_ZFP36L2
+			MG_down_BASP1
+			MG_down_CMSS1
+			MG_down_LARGE1
+			MG_down_SH3TC1
+			MG_down_LPP
+			MG_down_RUBCNL
+			MG_down_ARHGAP12
+			MG_up_HSPA1A
+			MG_down_NEAT1
+			MG_down_DCAF6
+			MG_down_PTEN
+			MG_down_FCGR3A
+			MG_down_ZNF407
+			MG_down_CAMKMT
+			MG_down_MPZL1
+			MG_down_TFEC
+			MG_down_LRRFIP1
+			MG_down_RANBP9
+			MG_down_IRAK3
+			MG_down_GALNT10
+			MG_down_RNF145
+			MG_down_FBXW7
+			MG_down_AGTPBP1
+			MG_down_VRK2
+			MG_down_IL1RAP
+			MG_down_MKNK1
+			MG_down_JAZF1
+			MG_down_MGAT5
+			MG_up_MCF2L
+			MG_down_MVB12B
+			MG_down_BTBD9
+			MG_down_TMEM117
+			MG_down_VOPP1
+			MG_down_TRPM2
+			MG_down_ALOX5
+			MG_down_PACSIN2
+			MG_down_NFATC2
+			MG_down_FAR2
+			MG_down_CYBB
+			MG_down_IL4R
+			MG_down_HCK
+			MG_down_NAMPT
+			MG_down_TSPAN14
+			MG_down_KCNK13
+			MG_down_GRIA4
+			MG_down_HAMP
+			MG_down_PFKFB3
+			MG_down_CTSB
+			MG_down_SRGN
+			MG_down_PTPRC
+			MG_down_MERTK
+			MG_down_PAG1
+			MG_down_LYN
+			MG_down_RIN3
+			MG_down_TNS3
+			MG_down_SUSD6
+			MG_down_ARL15
+			MG_up_IGKC
+			MG_down_TGFBR2
+			MG_down_FAM49B
+			MG_down_DOCK2
+			MG_down_MGAT4A
+			MG_down_KCNIP4
+			MG_down_CADM2
+			MG_down_LSAMP
+			MG_down_TNR
+			MG_up_NTM
+			MG_down_F13A1
+			MG_down_OPCML
+			MG_up_GPC5
+			MG_down_LRRC4C
+			MG_down_CDH20
+			MG_up_HMGB1
+			MG_up_SLC7A11
+			MG_up_SORBS1
+			MG_down_CSMD1
+			MG_down_SKAP2
+			MG_down_DISP1
+			MG_down_RAD51B
+			MG_down_LDLRAD4
+			MG_up_FAM149A
+			MG_down_SLC2A5
+			MG_down_PLP1
+			MG_up_SAMD4A
+			MG_down_RALGPS2
+			MG_down_IFI16
+			MG_down_TANC2
+			MG_down_RB1
+			MG_down_USP15
+			MG_down_RAB31
+			MG_down_SAMSN1
+			MG_up_PDK4
+			MG_down_TANK
+			MG_down_CMIP
+			MG_down_CNTNAP2
+			MG_down_RNF213
+			MG_down_ARHGAP6
+			MG_down_LIMS1
+			MG_down_PELI1
+			MG_down_FGD4
+			MG_down_SIPA1L2
+			MG_down_ITGAV
+			MG_down_NUMB
+			MG_down_RUNX2
+			MG_down_ATF6
+			MG_down_ALPK1
+			MG_down_UGCG
+			MG_down_SSH1
+			MG_down_HCLS1
+			MG_down_ST8SIA4
+			MG_down_RREB1
+			MG_down_TTC7A
+			MG_down_SUMF1
+			MG_down_REL
+			MG_down_MITF
+			MG_down_MAN1A1
+			MG_down_ATP13A3
+			MG_down_PEX5L
+			MG_down_FCHSD2
+			MG_down_KIRREL3
+			MG_down_IL1RAPL1
+			MG_down_SLC24A2
+			MG_down_AL034397.3
+			MG_down_MCU
+			MG_down_GPD2
+			MG_down_ZC3HAV1
+			MG_down_PRKD3
+			MG_down_MTUS1
+			MG_down_MAP3K8
+			MG_down_ADAM9
+			MG_down_LAPTM5
+			MG_down_UBASH3B
+			MG_down_GLUL
+			MG_down_ASAP1
+			MG_down_TRAF3
+			MG_down_DOCK11
+			MG_down_SH3BGRL
+			MG_down_ATP11C
+			MG_down_CTSC
+			MG_down_DTNBP1
+			MG_down_SAMHD1
+			MG_down_C1QB
+			MG_down_GMDS
+			MG_down_TLK1
+			MG_down_SCLT1
+			MG_down_LCP2
+			MG_down_FCGBP
+			MG_down_TBC1D8
+			MG_down_RNF144B
+			MG_down_FNDC3B
+			MG_down_XIST
+			MG_down_SRGAP1
+			MG_down_RNF149
+			MG_down_CERS6
+			MG_down_CUX1
+			MG_down_MACF1
+			MG_down_SPRED1
+			MG_down_DENND3
+			MG_down_GRB2
+			MG_down_ANKS1A
+			MG_down_SP100
+			MG_down_PARP14
+			MG_down_NIBAN1
+			MG_down_FKBP5
+			MG_down_ETV6
+			MG_down_TBC1D14
+			MG_down_PTPN2
+			MG_down_RBM47
+		Cluster 32 (indianred)
+			DEG members:
+			MG_down_SELENOP
+			MG_down_KCNMB2
+			MG_down_CD163L1
+			MG_down_AK5
+			MG_down_MAN2A1
+			MG_down_GRM3
+			MG_down_SPOCK3
+			MG_up_CREB5
+		Cluster 14 (indigo)
+			DEG members:
+			MG_down_B2M
+			MG_down_CNP
+			MG_down_HSP90B1
+			MG_down_PTMA
+			MG_down_PCSK5
+			MG_down_CBLB
+			MG_down_AIF1
+			MG_down_TUBA1B
+			MG_down_RPS14
+			MG_down_RPS3A
+			MG_down_RPL12
+			MG_down_RPS4X
+			MG_down_FAU
+			MG_down_RPL23
+			MG_down_RPS11
+			MG_down_RPL30
+			MG_down_RPS20
+			MG_down_RPL27A
+			MG_down_RPL23A
+			MG_down_RPS25
+			MG_down_RPL34
+			MG_down_RPL3
+			MG_down_RPS12
+			MG_down_RPS8
+			MG_down_ATP5F1E
+			MG_down_RPL35
+			MG_down_RPL36A
+			MG_down_RPL26
+			MG_down_RPS27A
+			MG_down_RPS18
+			MG_down_RPS23
+			MG_down_RPL19
+			MG_down_RPS6
+			MG_down_RPL32
+			MG_down_RPS15
+			MG_down_RPLP2
+			MG_down_RPS2
+			MG_down_YBX1
+			MG_down_GAPDH
+			MG_down_CLDND1
+			MG_down_RPL11
+			MG_down_RPL13A
+			MG_down_TMSB4X
+			MG_down_RPS19
+			MG_down_EEF1A1
+			MG_down_TMSB10
+			MG_down_RPL13
+			MG_down_TPT1
+			MG_down_RPS24
+			MG_down_RPS28
+			MG_down_RPS27
+			MG_down_RPLP1
+			MG_down_RPL41
+		Cluster 7 (khaki)
+			DEG members:
+			MG_down_LAIR1
+			MG_down_STOM
+			MG_down_RAB27A
+			MG_down_ADARB2
+			MG_down_MDGA2
+			MG_down_TTLL5
+			MG_down_WNT5A
+			MG_down_IFI44
+			MG_down_FAM20A
+			MG_down_PPA1
+		Cluster 2 (moccasin)
+			DEG members:
+			DA_down_PLP1
+			DA_down_MOBP
+			DA_down_GPM6B
+		Cluster 8 (navy)
+			DEG members:
+			MG_down_LILRB1
+			MG_down_LY96
+		Cluster 34 (olive)
+			DEG members:
+			MG_down_DPYD
+			MG_down_CD163
+			MG_down_STARD13
+			MG_down_LIMK2
+			MG_down_SLC1A3
+			MG_down_SLC7A5
+		Cluster 29 (olivedrab)
+			DEG members:
+			MG_down_SPTLC3
+			MG_down_SHOC1
+		Cluster 5 (orange)
+			DEG members:
+			MG_down_YBX3
+			MG_down_FBXO34
+			MG_down_EEFSEC
+			MG_down_APLP2
+			MG_down_CNTLN
+			MG_down_ANO6
+			MG_down_ZNF277
+			MG_down_SEC24D
+			MG_down_PVT1
+		Cluster 21 (palegoldenrod)
+			DEG members:
+			MG_down_MTRNR2L12
+			MG_down_MT-CYB
+			MG_down_BAZ1A
+			MG_down_MOB3B
+			MG_down_MGAT1
+			MG_down_SPATS2L
+			MG_down_FUT8
+			MG_down_DDX60L
+			MG_down_UTRN
+			MG_up_GLDN
+			MG_down_DMXL2
+			MG_down_PARP9
+			MG_down_LAP3
+			MG_down_SP110
+			MG_down_DSE
+			MG_down_TRPS1
+		Cluster 23 (palegreen)
+			DEG members:
+			MG_up_EEPD1
+			MG_down_HK1
+		Cluster 19 (peru)
+			DEG members:
+			MG_down_SAMD9L
+			MG_down_IL10RA
+			MG_down_SPP1
+			MG_down_CDK8
+			MG_down_BRWD3
+			MG_down_CASK
+			MG_down_AL392172.1
+			MG_down_AIDA
+			MG_down_RCOR1
+			MG_down_ARSB
+			MG_down_MAP2K1
+			MG_down_PRIM2
+			MG_down_CD226
+			MG_down_APAF1
+			MG_down_TMEM131L
+			MG_down_TLE4
+			MG_down_E2F3
+			MG_down_FARP1
+			MG_down_UBE2F
+			MG_down_EXOC6
+			MG_down_CLEC16A
+		Cluster 13 (purple)
+			DEG members:
+			MG_down_JAK3
+			MG_down_FTH1
+			MG_down_FTL
+		Cluster 9 (red)
+			DEG members:
+			MG_down_HS2ST1
+			MG_down_B4GALT5
+			MG_down_PGK1
+			MG_down_PSTPIP2
+		Cluster 11 (saddlebrown)
+			DEG members:
+			MG_down_SLC8A1
+			DA_down_PLCG2
+		Cluster 22 (sandybrown)
+			DEG members:
+			MG_down_EIF2AK2
+			MG_down_XAF1
+			MG_down_VCAN
+			MG_down_MT-CO1
+			MG_down_DYSF
+			MG_down_VSIG4
+		Cluster 36 (seagreen)
+			DEG members:
+			MG_down_ADGRE2
+			MG_down_TYMP
+			MG_down_RUNX1
+			MG_down_ARHGAP26
+			MG_down_CEMIP2
+			MG_down_SLC11A1
+		Cluster 35 (sienna)
+			DEG members:
+			MG_down_MX2
+			MG_down_MX1
+			MG_down_PYGL
+			MG_down_WARS
+		Cluster 31 (teal)
+			DEG members:
+			MG_down_CELF2
+			MG_down_SLC2A3
+			MG_down_SYTL3
+			MG_down_ZNF331
+			MG_down_FAM49A
+			MG_down_KLHL6
+			MG_down_CHSY1
+			MG_down_SWAP70
+			MG_down_SEC14L1
+			MG_down_GPR155
+			MG_down_CEBPD
+			MG_down_ASAH1
+			MG_down_TBC1D2B
+			MG_down_FAM13A
+			MG_down_CPVL
+			MG_down_MIR181A1HG
+			MG_down_LRRK2
+			MG_down_SLA
+			MG_down_INPP4A
+			MG_down_TNFRSF1B
+			MG_down_GPRIN3
+			MG_down_ST3GAL1
+			MG_down_PPARD
+			MG_down_SLC25A37
+			MG_down_RAPGEF1
+			MG_down_MSR1
+			MG_down_AKAP13
+			MG_down_PRKAG2
+			MG_down_RGS1
+			MG_down_FNIP2
+			MG_down_VMP1
+			MG_down_NABP1
+			MG_down_KYNU
+			MG_down_ZNF804A
+			MG_down_ITSN1
+			MG_down_SAT1
+			MG_down_GK
+			MG_down_GNA13
+			MG_down_PLSCR1
+			MG_down_SIPA1L1
+			MG_down_HIF1A
+			MG_down_ARID5B
+			MG_down_EPB41L3
+			MG_down_FAM110B
+			MG_down_UBXN2B
+			MG_down_TNFSF13B
+			MG_down_SDCBP
+			MG_down_CREM
+			MG_down_ACSL1
+			MG_down_KCNMA1
+			MG_down_TLR2
+		Cluster 24 (tomato)
+			DEG members:
+			MG_down_HIF1A-AS3
+			MG_up_CD83
+			MG_up_OLR1
+		Cluster 30 (turquoise)
+			DEG members:
+			MG_down_LGMN
+			MG_down_LITAF
+			MG_down_TFRC
+			MG_down_MB21D2
+			MG_down_MALT1
+			MG_down_ATP1B3
+			MG_down_PAPOLG
+			MG_down_GNA12
+			MG_down_CD55
+		Cluster 6 (violet)
+			DEG members:
+			MG_up_IER2
+			MG_up_CCL3
+			MG_down_SLC2A9
+			MG_down_EDA
+			MG_down_MCTP1
+			MG_down_PTK2B
+			MG_down_MMS22L
+			MG_up_CXCL8
+			MG_up_NFKBIA
+			MG_down_THEMIS2
+			MG_down_SDC2
+			MG_down_FOSL2
+			MG_up_CCL3L1
+Splitting DEG clusters into subblocks/subclusters....
+Getting DEG correlation info for
+	hiv_sud_status: neg_y vs. neg_n
+darkgreen
+26.0
+mean: 0.5382982945675634, std.: 0.023358327718571006
+saddlebrown
+11.0
+std. dev. of current clust. is 0; setting to 1 now
+mean: 0.5604435298035506, std.: 1.0
+deeppink
+16.0
+mean: 0.5587788047094036, std.: 0.010290280296198606
+peru
+19.0
+mean: 0.5376575586350236, std.: 0.024359368515230736
+chocolate
+18.0
+mean: 0.5510407962844145, std.: 0.007579992080191293
+red
+9.0
+mean: 0.5213640736489453, std.: 0.005945884833442439
+darkred
+3.0
+mean: 0.5664175662848764, std.: 0.0063081613735196385
+gray
+4.0
+cluster contains nan values. printing distances:
+	0.671937415619422, 0.8119847251740215, 0.8219010017251253, 0.7766052064433627, 0.9450093862638045, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan
+printing DEGs:
+	MG_down_FGF12, MG_down_CNOT6L, MG_down_P4HA1, MG_down_ANLN, MG_down_MS4A7, MG_down_PTPRG, MG_down_EZH2, MG_up_DNAH7, MG_up_TMEM232, MG_down_HELLS, MG_up_AGBL4, MG_up_C8orf34, MG_down_RFC3, MG_up_WDR49, MG_up_CFAP299, MG_up_CFAP54, MG_down_ATAD2, MG_up_SYNE1, MG_down_DIAPH3, MG_down_BRIP1, MG_up_CRB1
+mean: nan, std.: nan
+hotpink
+28.0
+mean: 0.5165775348787954, std.: 0.022843709953686203
+sienna
+35.0
+mean: 0.5298814665741826, std.: 0.026948648150782555
+palegoldenrod
+21.0
+mean: 0.5293028179278102, std.: 0.02485406171513779
+indianred
+32.0
+mean: 0.538268863170077, std.: 0.018069958436336617
+orange
+5.0
+mean: 0.5292285700685437, std.: 0.02121170738116193
+indigo
+14.0
+mean: 0.5111087530838647, std.: 0.026936715833010175
+burlywood
+12.0
+mean: 0.5370437862761486, std.: 0.02895247859618507
+moccasin
+2.0
+mean: 0.5262527000898192, std.: 0.005776260570718172
+darkolivegreen
+33.0
+mean: 0.5352137763404103, std.: 0.013106435574253087
+darkorange
+10.0
+std. dev. of current clust. is 0; setting to 1 now
+mean: 0.5489612177589028, std.: 1.0
+darkturquoise
+25.0
+mean: 0.5255115084328927, std.: 0.01892624956204816
+tomato
+24.0
+mean: 0.5341687971432028, std.: 0.017162997638973776
+purple
+13.0
+mean: 0.5415733206760154, std.: 0.020458111649529764
+darkviolet
+27.0
+mean: 0.5472887071992447, std.: 0.012873999534008671
+turquoise
+30.0
+mean: 0.5283473004407298, std.: 0.030668035400792038
+seagreen
+36.0
+mean: 0.5602509098488679, std.: 0.02088498928826503
+khaki
+7.0
+mean: 0.5325447775863299, std.: 0.03932034883661641
+palegreen
+23.0
+std. dev. of current clust. is 0; setting to 1 now
+mean: 0.5363345228874885, std.: 1.0
+olive
+34.0
+mean: 0.5422903055361484, std.: 0.02764871773024501
+forestgreen
+20.0
+mean: 0.552888129896627, std.: 0.014752349035124616
+teal
+31.0
+mean: 0.515748790510097, std.: 0.014130986810923353
+olivedrab
+29.0
+std. dev. of current clust. is 0; setting to 1 now
+mean: 0.5229450562281729, std.: 1.0
+sandybrown
+22.0
+mean: 0.5485276650093344, std.: 0.034450036333922386
+navy
+8.0
+std. dev. of current clust. is 0; setting to 1 now
+mean: 0.5481098417506833, std.: 1.0
+violet
+6.0
+mean: 0.5241667589035425, std.: 0.03599027660542381
+darkgoldenrod
+15.0
+mean: 0.5354949655351408, std.: 0.02398682037635626
+black
+0.0
+mean: 0.5209749916496175, std.: 0.01961713920684553
+coral
+1.0
+mean: 0.5314960419408097, std.: 0.01419352036666085
+cornsilk
+17.0
+mean: 0.5335558901509969, std.: 0.03488165785041065
+Getting gene ontology terms for DEG subclusters....
+Reading DEG subcluster information from
+	degs_w_sud_by_hiv_group__test_cond_deg_subclust_w_scores.csv...
+Getting GO gene set annotations for DEG subclusters....
+	row 1 of 46
+	row 2 of 46
+	row 3 of 46
+	row 4 of 46
+	row 5 of 46
+	row 6 of 46
+	row 7 of 46
+	row 8 of 46
+	row 9 of 46
+	row 10 of 46
+	row 11 of 46
+	row 12 of 46
+	row 13 of 46
+	row 14 of 46
+	row 15 of 46
+	row 16 of 46
+	row 17 of 46
+	row 18 of 46
+	row 19 of 46
+	row 20 of 46
+	row 21 of 46
+	row 22 of 46
+	row 23 of 46
+	row 24 of 46
+	row 25 of 46
+	row 26 of 46
+	row 27 of 46
+	row 28 of 46
+	row 29 of 46
+	row 30 of 46
+	row 31 of 46
+	row 32 of 46
+	row 33 of 46
+	row 34 of 46
+	row 35 of 46
+	row 36 of 46
+	row 37 of 46
+	row 38 of 46
+	row 39 of 46
+	row 40 of 46
+	row 41 of 46
+	row 42 of 46
+	row 43 of 46
+	row 44 of 46
+	row 45 of 46
+	row 46 of 46
+Generating skeleton functional annotation documents for highly coordinated, mixed-cell-type DEG subclusters....
+5th percentile value: 0.7875008346632086
+10th percentile value: 0.8104643102700162
+15th percentile value: 0.822046734485043
+20th percentile value: 0.8285505679338152
+hiv_sud_status_neg_y_neg_n: 46 DEG cassettes
+Row 1 DEGs:
+	MG_down_SLC8A1
+	DA_down_PLCG2
+Row 2 DEGs:
+	MG_down_PIK3AP1
+	MG_down_AL163541.1
+	DA_down_DSCAML1
+Processing compressed annotations for mixed-cell-type DEG cassette 1...
+Processing compressed annotations for mixed-cell-type DEG cassette 2...
+
+
+PS:
+
+Read file </sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0.e> for stderr output of this job.
+
