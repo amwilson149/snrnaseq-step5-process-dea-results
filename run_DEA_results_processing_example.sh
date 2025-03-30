@@ -1,25 +1,8 @@
 #!/bin/bash
-#BSUB -P acc_motor # project name
-#BSUB -q premium # queue name ('premium' is standard on Minerva)
-#BSUB -n 10 # number of tasks in a parallel job (also submits as a parallel job)
-#BSUB -R span[hosts=1] # resource requirements
-#BSUB -R rusage[mem=20000] # resource requirements
-#BSUB -W 10:00 # job runtime limit (HH:MM)
-#BSUB -J /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0
-#BSUB -o /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0.o
-#BSUB -e /sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results/log_files/run__05_process_DEA_results__0.e
-#BSUB -L /bin/bash
 
 set -ev
 
 # 01. Set up environment
-# 01a. Activate conda environment
-ml anaconda3/2020.11
-ml -python
-source /hpc/packages/minerva-centos7/anaconda3/2020.11/etc/profile.d/conda.sh
-conda activate CO-deg-analysis-env
-
-# 01b. Get root directory
 exec_dir=$( pwd )
 cd "${exec_dir}"
 an_dea_res_dir="${exec_dir}/scripts"
