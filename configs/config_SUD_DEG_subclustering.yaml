@@ -123,4 +123,3 @@ dea_output_upreg_fn_root: 'sig_overexpr_genes_all'
 dea_output_downreg_fn_root: 'sig_underexpr_genes_all' 
 
 
-root_dir: '/sc/arion/projects/motor/WILSOA28/demuxlet_analysis/snrnaseq__05_process_dea_results'
